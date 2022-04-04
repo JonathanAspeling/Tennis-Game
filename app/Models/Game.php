@@ -11,4 +11,9 @@ class Game extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'player_1_score',
+        'player_2_score',
+        'game_state'
+    ];
 }

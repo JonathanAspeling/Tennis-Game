@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
+            $table->integer('player_1_score')->nullable();
+            $table->integer('player_2_score')->nullable();
+            $table->text('game_state');
         });
     }
 
