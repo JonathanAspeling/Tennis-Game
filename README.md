@@ -8,8 +8,10 @@
 ## Installation Instructions
 - Clone Repo to Local Host
 - Copy env.example to .env in your Local Repo
-- Populate all .env values with names and passwords as you see fit except
+- Populate all .env values, not yet completed, with names and passwords as you see fit except
   - APP_KEY : leave blank
+- Next run the following command from the CLI in your App Folder
+  - composer install
 - Run the following CLI command from within your Local App Folder
   - ./vendor/bin/sail up -d
 - Once the Docker Boot finishes set up and deploy open the app CLI by using the following CLI command from within your app folder
@@ -18,7 +20,8 @@
   - composer install
   - php artisan key:generate
   - php artisan migrate
-  - npm install && npm run dev
+  - npm install
+  - npm run dev
 - Navigate to http://localhost/ on your machine to see the Placeholder Laravel Landing Page
 
 ## Usage / Critical Path
