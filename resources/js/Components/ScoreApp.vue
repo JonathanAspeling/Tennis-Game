@@ -19,13 +19,13 @@ import {Inertia} from '@inertiajs/inertia'
 
 export default {
   setup() {
-    const form = reactive({
-      first_name: null,
-      last_name: null,
-    })
+    const form = {
+      player_1_score: 0,
+      player_2_score: 0
+    };
 
     function submit() {
-      Inertia.post('/users', form)
+      Inertia.post('/score-submit', form)
     }
 
     return {form, submit}
