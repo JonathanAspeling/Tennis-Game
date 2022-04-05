@@ -84,13 +84,16 @@ class Game extends Model
 
     private function gameNotTiedBelowThreePoints(): bool
     {
-        return $this->player_1_score != $this->player_2_score && (!$this->gameInTieBreakMode());
+        return $this->player_1_score != $this->player_2_score
+            && (!$this->gameInTieBreakMode())
+            && $this->player_1_score < 4
+            && $this->player_2_score < 4;
     }
 
     private function gameIsInAdvantageState(): bool
     {
         return (abs($this->player_1_score - $this->player_2_score) == 1)
-            && ($this->gameInTieBreakMode());
+            && ($this->player_1_score >3 || $this->player_2_score >3);
     }
 
     private function getAdvantagePlayerString(): string
@@ -103,8 +106,10 @@ class Game extends Model
 
     private function gameIsComplete(): bool
     {
-        return (abs($this->player_1_score - $this->player_2_score) >= 2)
-            && ($this->gameInTieBreakMode());
+        return ((abs($this->player_1_score - $this->player_2_score) >= 2)
+            && ($this->gameInTieBreakMode()))
+            || ((abs($this->player_1_score - $this->player_2_score) >= 2)
+                && ($this->player_1_score >= 4 || $this->player_2_score >= 4));
     }
 
     private function getWinningPlayerString(): string
@@ -116,7 +121,7 @@ class Game extends Model
 
     private function gameInTieBreakMode(): bool
     {
-        return (int)bcdiv((string)($this->player_1_score + $this->player_2_score), '2') >= 3;
+        return $this->player_1_score >=3 && $this->player_2_score >=3 && $this->player_1_score == $this->player_2_score;
     }
 
 }
