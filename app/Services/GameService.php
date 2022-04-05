@@ -8,6 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class GameService
 {
 
+    /**
+     * @return Game
+     */
     public function createNewGame(): Game
     {
         return Game::create([
@@ -17,6 +20,12 @@ class GameService
         ]);
     }
 
+    /**
+     * @param int $gameID
+     * @param int $player_1_score
+     * @param int $player_2_score
+     * @return Game
+     */
     public function updateGameScore(int $gameID, int $player_1_score, int $player_2_score): Game
     {
         $activeGame = Game::find($gameID);
