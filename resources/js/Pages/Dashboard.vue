@@ -24,53 +24,13 @@ import ScoreApp from "@/Components/ScoreApp";
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
             <ScoreApp></ScoreApp>
-            <div class="game-state" v-if="renderComponent">{{ GameState }}</div>
+            <div class="game-state">{{ this.$attrs['activeGame'].game_state }}</div>
           </div>
         </div>
       </div>
     </div>
   </BreezeAuthenticatedLayout>
 </template>
-
-<script>
-
-import {onMounted} from "vue";
-
-export default{
-  data()
-  {
-    return {
-      GameState: 'Pending',
-      renderComponent: true,
-    }
-  },
-  methods: {
-    // Needed to add this hack as the computed property becomes stail on initial load until you
-    // Inspect the component via Dev Tools
-    // https://michaelnthiessen.com/force-re-render/
-    forceRerender() {
-      // Remove my-component from the DOM
-      this.renderComponent = false;
-
-      this.$nextTick(() => {
-        // Add the component back in
-        this.renderComponent = true;
-      });
-    }
-  },
-
-  computed:{
-    updateGameStateMessage(){
-      this.GameState = this.$attrs['activeGame'].game_state;
-    }
-  },
-
-  mounted() {
-    this.GameState = this.$attrs['activeGame'].game_state;
-  }
-}
-
-</script>
 
 <style scoped>
 .game-state{
