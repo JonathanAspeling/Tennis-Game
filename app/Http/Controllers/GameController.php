@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use App\Models\Game;
+use App\Services\GameService;
+use Illuminate\Support\Facades\App;
+use Inertia\Inertia;
 
 class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $currentGame = gameService()->createNewGame();
+
+        return Inertia::render('Dashboard', ['activeGame'=>$currentGame]);
     }
 
     /**
