@@ -2,6 +2,9 @@
   import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
   import { Head } from "@inertiajs/inertia-vue3";
   import ScoreApp from "@/Components/ScoreApp";
+  const props = defineProps({
+    game: Object,
+  });
 </script>
 
 <style></style>
@@ -20,9 +23,9 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
-            <ScoreApp></ScoreApp>
+            <ScoreApp :game="game"></ScoreApp>
             <div class="game-state mt-4 mx-auto w-1/2 text-center font-2xl">
-              {{ this.$attrs["activeGame"].game_state }}
+              {{ game.game_state }}
             </div>
           </div>
         </div>
