@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGameRequest;
-use App\Http\Requests\UpdateGameRequest;
 use App\Models\Game;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 use App\Services\GameService;
 use Illuminate\Support\Facades\App;
+use App\Http\Requests\StoreGameRequest;
 use Illuminate\Support\Facades\Session;
-use Inertia\Inertia;
+use App\Http\Requests\UpdateGameRequest;
+use Illuminate\Support\Facades\Redirect;
 
 class GameController extends Controller
 {
@@ -16,21 +18,23 @@ class GameController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        $currentGame = gameService()->createNewGame();
-        Session::put('gameID',$currentGame->id);
+        $currentGame = $request->input('game_id') ? Game::find($request->input('game_id')) :  gameService()->createNewGame();
 
-        return Inertia::render('Dashboard', ['activeGame'=>$currentGame]);
+        return Inertia::render('Dashboard', ['game'=>$currentGame]);
     }
 
-    public function submitLatestScore()
+    public function submitLatestScore(StoreGameRequest $request)
     {
-
-        $gameID = Session::get('gameID');
-        $player_1_score = request('player_1_score');
-        $player_2_score = request('player_2_score');
+        $gameID = $request->input('game_id');
+        $player_1_score = $request->input('player_1_score');
+        $player_2_score = $request->input('player_2_score');
         $currentGame = gameService()->updateGameScore($gameID, $player_1_score, $player_2_score);
-        return Inertia::render('Dashboard',['activeGame'=>$currentGame]);
+
+        return Redirect::route('dashboard',[
+            'game_id' => $currentGame->id
+        ]);;
+
     }
 }

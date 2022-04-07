@@ -27,6 +27,5 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [GameController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/score-submit',[GameController::class,'submitLatestScore'])->middleware(['auth', 'verified'])->name('score-submit');
-Route::get('/score-submit',[GameController::class,'index'])->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
