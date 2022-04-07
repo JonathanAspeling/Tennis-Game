@@ -2,14 +2,35 @@
   <form @submit.prevent="submit">
     <div class="score-pannel">
       <label class="player-1-label" for="player_1">Player 1</label>
-      <div class="pannels">
-        <input id="player_1" v-model="form.player_1_score" />
-        <input id="player_2" v-model="form.player_2_score" />
+      <div class="pannels flex">
+        <div class="flex-col space-x-4">
+          <input id="player_1" v-model="form.player_1_score" />
+          <div
+            class="text-xs w-32 text-center text-red-700"
+            v-if="form.errors.player_1_score"
+          >
+            {{ form.errors.player_1_score }}
+          </div>
+        </div>
+        <div class="flex-col space-x-4">
+          <input id="player_2" v-model="form.player_2_score" />
+          <div
+            class="text-xs w-32 text-center text-red-700"
+            v-if="form.errors.player_2_score"
+          >
+            {{ form.errors.player_2_score }}
+          </div>
+        </div>
       </div>
       <label class="player-2-label" for="player_2">Player 2</label>
     </div>
     <br />
     <button class="submit-button" type="submit">Submit</button>
+    <a
+      class="underline text-indigo-600 block text-center mx-auto mt-4"
+      href="/dashboard"
+      >Reset</a
+    >
   </form>
 </template>
 

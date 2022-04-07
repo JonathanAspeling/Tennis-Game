@@ -20,12 +20,12 @@ class GameController extends Controller
      */
     public function index(Request $request)
     {
-        $currentGame = $request->input('game_id') ? Game::first() :  gameService()->createNewGame();
+        $currentGame = $request->input('game_id') ? Game::find($request->input('game_id')) :  gameService()->createNewGame();
 
         return Inertia::render('Dashboard', ['game'=>$currentGame]);
     }
 
-    public function submitLatestScore(Request $request)
+    public function submitLatestScore(StoreGameRequest $request)
     {
         $gameID = $request->input('game_id');
         $player_1_score = $request->input('player_1_score');
