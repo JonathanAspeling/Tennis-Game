@@ -123,6 +123,23 @@ class GameServiceTest extends TestCase
         $this->assertEquals('Advantage player 1',$updatedGame->game_state);
     }
 
+    public function testPlayerWinsShowsAsExpected()
+    {
+        $newGame = gameService()->createNewGame();
+
+        $updatedGame = gameService()->updateGameScore($newGame->id,4,2);
+        $this->assertEquals('Player 1 wins',$updatedGame->game_state);
+
+        $updatedGame = gameService()->updateGameScore($newGame->id,0,4);
+        $this->assertEquals('Player 2 wins',$updatedGame->game_state);
+
+        $updatedGame = gameService()->updateGameScore($newGame->id,23,21);
+        $this->assertEquals('Player 1 wins',$updatedGame->game_state);
+
+        $updatedGame = gameService()->updateGameScore($newGame->id,5,7);
+        $this->assertEquals('Player 2 wins',$updatedGame->game_state);
+    }
+
     public function testScoreUpdatesPersist()
     {
         $newGame = gameService()->createNewGame();
