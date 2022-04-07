@@ -16,19 +16,20 @@
 <script setup>
   import { reactive } from "vue";
   import { Inertia } from "@inertiajs/inertia";
+  import { useForm } from "@inertiajs/inertia-vue3";
 
   const props = defineProps({
     game: Object,
   });
 
-  const form = {
+  const form = useForm({
     game_id: props.game?.id,
     player_1_score: props.game?.player_1_score,
     player_2_score: props.game?.player_1_score,
-  };
+  });
 
   function submit() {
-    Inertia.post("/score-submit", form);
+    form.post("/score-submit");
   }
 </script>
 
