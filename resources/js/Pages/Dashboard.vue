@@ -1,16 +1,13 @@
 <script setup>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import {Head} from '@inertiajs/inertia-vue3';
-import ScoreApp from "@/Components/ScoreApp";
-
+  import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+  import { Head } from "@inertiajs/inertia-vue3";
+  import ScoreApp from "@/Components/ScoreApp";
 </script>
 
-<style>
-
-</style>
+<style></style>
 
 <template>
-  <Head title="Dashboard"/>
+  <Head title="Dashboard" />
 
   <BreezeAuthenticatedLayout>
     <template #header>
@@ -24,22 +21,12 @@ import ScoreApp from "@/Components/ScoreApp";
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 bg-white border-b border-gray-200">
             <ScoreApp></ScoreApp>
-            <div class="game-state">{{ this.$attrs['activeGame'].game_state }}</div>
+            <div class="game-state mt-4 mx-auto w-1/2 text-center font-2xl">
+              {{ this.$attrs["activeGame"].game_state }}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </BreezeAuthenticatedLayout>
 </template>
-
-<style scoped>
-.game-state{
-  margin-top: 1.5em;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  text-align: center;
-  font-size: 2.5em;
-}
-
-</style>
